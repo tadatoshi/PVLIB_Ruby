@@ -9,6 +9,12 @@ class ActiveCsv
     @csv_filepath = csv_filepath
   end
 
+  def self.create(csv_filepath)
+    new_instance = self.new(csv_filepath)
+    new_instance.load_data
+    new_instance
+  end
+
   def persisted?
     false
   end
