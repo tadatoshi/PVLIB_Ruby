@@ -1,8 +1,10 @@
-# PVLIBRuby
+# PVLIB_Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/PVLIB_Ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
+PVLIB_MatLab translated to Ruby code in Object-Oriented way.
 
-TODO: Delete this and the text above, and describe your gem
+Since the naming convention is PVLIB_[language name], e.g. PVLIB_MatLab, PVLIB_Python, this gem is following the same naming convention, i.e. PVLIB_Ruby. 
+
+However, internally, this gem is following Ruby naming convention. Hence, the code is under 'lib/pvlib_ruby'. 
 
 ## Installation
 

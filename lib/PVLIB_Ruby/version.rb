@@ -1,3 +1,3 @@
-module PVLIBRuby
+module PvlibRuby
   VERSION = "0.1.0"
 end

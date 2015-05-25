@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'PVLIB_Ruby/version'
+require 'pvlib_ruby/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "PVLIB_Ruby"
-  spec.version       = PVLIBRuby::VERSION
+  spec.version       = PvlibRuby::VERSION
   spec.authors       = ["Tadatoshi Takahashi"]
   spec.email         = ["tadatoshi@gmail.com"]
 

@@ -1,7 +1,8 @@
-require 'PVLIB_Ruby/version'
-require 'PVLIB_Ruby/models/active_csv'
-require 'PVLIB_Ruby/models/pv_module'
+require 'pvlib_ruby/version'
+require 'pvlib_ruby/models/active_csv'
+require 'pvlib_ruby/models/pv_module'
+require 'pvlib_ruby/pv_module_characterization'
 
-module PVLIB_Ruby
+module PvlibRuby
   # Your code goes here...
 end
