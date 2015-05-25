@@ -5,17 +5,9 @@ require 'csv'
 class ActiveCsv
   include ActiveModel::Model
 
-  attr_accessor :csv_filepath
-
-  # def initialize(csv_filepath)
-  #   @csv_filepath = csv_filepath
-  # end
-
   def self.create(csv_filepath)
-    # new_instance = self.new(csv_filepath)
     new_instance = self.new
-    new_instance.csv_filepath = csv_filepath
-    new_instance.load_data
+    new_instance.load_data(csv_filepath)
     new_instance
   end
 
@@ -27,8 +19,8 @@ class ActiveCsv
     # TODO: implement this
   end
 
-  def load_data
-    csv = CSV.new(File.new(@csv_filepath), headers: true, header_converters: :symbol)
+  def load_data(csv_filepath)
+    csv = CSV.new(File.new(csv_filepath), headers: true, header_converters: :symbol)
 
     data = csv.shift
 
