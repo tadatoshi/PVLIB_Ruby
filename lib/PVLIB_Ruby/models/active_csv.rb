@@ -5,12 +5,16 @@ require 'csv'
 class ActiveCsv
   include ActiveModel::Model
 
-  def initialize(csv_filepath)
-    @csv_filepath = csv_filepath
-  end
+  attr_accessor :csv_filepath
+
+  # def initialize(csv_filepath)
+  #   @csv_filepath = csv_filepath
+  # end
 
   def self.create(csv_filepath)
-    new_instance = self.new(csv_filepath)
+    # new_instance = self.new(csv_filepath)
+    new_instance = self.new
+    new_instance.csv_filepath = csv_filepath
     new_instance.load_data
     new_instance
   end
