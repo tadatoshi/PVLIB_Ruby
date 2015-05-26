@@ -1,8 +1,0 @@
-class PvModuleCharacterization
-
-  
-
-
-
-
-end
