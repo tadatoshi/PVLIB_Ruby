@@ -26,21 +26,21 @@ class PvPerformanceCharacterization
 
     # f1(AMa)
     def empirical_solar_spectral_influence_on_short_circuit_current(absolute_air_mass)
-      @pv_module.air_mass_variation_polynomial_coefficients[0] +
-      @pv_module.air_mass_variation_polynomial_coefficients[1] * absolute_air_mass + 
+      @pv_module.air_mass_variation_polynomial_coefficients[4] +
+      @pv_module.air_mass_variation_polynomial_coefficients[3] * absolute_air_mass + 
       @pv_module.air_mass_variation_polynomial_coefficients[2] * absolute_air_mass.power(2) +
-      @pv_module.air_mass_variation_polynomial_coefficients[3] * absolute_air_mass.power(3) +
-      @pv_module.air_mass_variation_polynomial_coefficients[4] * absolute_air_mass.power(4)
+      @pv_module.air_mass_variation_polynomial_coefficients[1] * absolute_air_mass.power(3) +
+      @pv_module.air_mass_variation_polynomial_coefficients[0] * absolute_air_mass.power(4)
     end
 
     # f2(AOI)
     def empirical_opitical_influence_on_short_circuit_current(angle_of_incidence)
-      @pv_module.angle_of_incidence_polynominal_coefficients[0] + 
-      @pv_module.angle_of_incidence_polynominal_coefficients[1] * angle_of_incidence + 
-      @pv_module.angle_of_incidence_polynominal_coefficients[2] * angle_of_incidence.power(2) + 
-      @pv_module.angle_of_incidence_polynominal_coefficients[3] * angle_of_incidence.power(3) + 
-      @pv_module.angle_of_incidence_polynominal_coefficients[4] * angle_of_incidence.power(4) + 
-      @pv_module.angle_of_incidence_polynominal_coefficients[5] * angle_of_incidence.power(5)
+      @pv_module.angle_of_incidence_polynominal_coefficients[5] + 
+      @pv_module.angle_of_incidence_polynominal_coefficients[4] * angle_of_incidence + 
+      @pv_module.angle_of_incidence_polynominal_coefficients[3] * angle_of_incidence.power(2) + 
+      @pv_module.angle_of_incidence_polynominal_coefficients[2] * angle_of_incidence.power(3) + 
+      @pv_module.angle_of_incidence_polynominal_coefficients[1] * angle_of_incidence.power(4) + 
+      @pv_module.angle_of_incidence_polynominal_coefficients[0] * angle_of_incidence.power(5)
     end
 
 end
