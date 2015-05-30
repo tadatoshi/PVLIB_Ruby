@@ -11,11 +11,11 @@ class PvModule < ActiveCsv
   end
 
   def air_mass_variation_polynomial_coefficients
-    self.a.map {|coefficient| BigDecimal(coefficient.to_s)}
+    convert_coefficients_to_bigdecimal(self.a)
   end
 
   def angle_of_incidence_polynominal_coefficients
-    self.b.map {|coefficient| BigDecimal(coefficient.to_s)}
+    convert_coefficients_to_bigdecimal(self.b)
   end
 
   def diffuse_irradiance_factor
@@ -25,5 +25,42 @@ class PvModule < ActiveCsv
   def normalized_temperature_coefficient_for_short_circuit_current
     BigDecimal(self.alphaisc.to_s)
   end
+
+  def maximum_power_point_current_0
+    BigDecimal(self.imp0.to_s)
+  end
+
+  def performance_coefficients
+    convert_coefficients_to_bigdecimal(self.c)
+  end
+
+  def normalized_temperature_coefficient_for_maximum_power_point_current
+    BigDecimal(self.alphaimp.to_s)
+  end
+
+  def open_circuit_voltage_0
+    BigDecimal(self.voc0.to_s)
+  end
+
+  def number_of_cells_in_series
+    BigDecimal(self.ns.to_s)
+  end
+
+  def diode_factor
+    BigDecimal(self.n.to_s)
+  end
+
+  def temperature_coefficient_for_open_circuit_voltage
+    BigDecimal(self.betavoc.to_s)
+  end
+
+  def irradiance_dependent_temperature_coefficient_for_open_circuit_voltage
+    BigDecimal(self.mbetavoc.to_s)
+  end
+
+  private
+    def convert_coefficients_to_bigdecimal(coefficients)
+      coefficients.map {|coefficient| BigDecimal(coefficient.to_s)}
+    end
 
 end

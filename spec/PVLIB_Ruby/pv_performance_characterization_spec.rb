@@ -5,10 +5,14 @@ describe PvPerformanceCharacterization do
 
   it 'should get 5 points on IV curve' do
 
-    pv_module = PvModule.new(name: 'Sample Module', isc0: 5.988, alphaisc: 0.000232,
+    pv_module = PvModule.new(name: 'Sample Module', isc0: 5.988, imp0: 5.56, voc0: 48.53,
+                             alphaisc: 0.000232, alphaimp: -0.00036, 
+                             betavoc: -0.152, mbetavoc: 0, 
+                             ns: 72, 
+                             c: [1.0072, -0.0072, 0.32304, -3.4984, 0.9966, 0.0034, 1.0827, -0.0827], 
                              a: [-0.0001223, 0.002416, -0.01912, 0.07365, 0.9259], 
                              b: [-2.99E-09, 5.35E-07, -3.40E-05, 0.000862, -0.00699, 1], 
-                             fd: 1)
+                             fd: 1, n: 1.241)
 
     absolute_air_mass = BigDecimal('8.4026') # for 200th row in PVSC40Tutorial_Master
     angle_of_incidence = BigDecimal('78.2885') # for 200th row in PVSC40Tutorial_Master
@@ -25,11 +29,11 @@ describe PvPerformanceCharacterization do
     expect(pv_performance_characterization.short_circuit_current).to be_within(0.0001).of(BigDecimal('0.1137'))
     expect(pv_performance_characterization.isc).to be_within(0.0001).of(BigDecimal('0.1137'))
 
-    expect(pv_performance_characterization.maximum_power_point_current).to eq(BigDecimal('0.1072'))
-    expect(pv_performance_characterization.imp).to eq(BigDecimal('0.1072'))   
+    expect(pv_performance_characterization.maximum_power_point_current).to be_within(0.0001).of(BigDecimal('0.1072'))
+    expect(pv_performance_characterization.imp).to be_within(0.0001).of(BigDecimal('0.1072'))   
 
-    expect(pv_performance_characterization.open_circuit_voltage).to eq(BigDecimal('41.8039'))
-    expect(pv_performance_characterization.voc).to eq(BigDecimal('41.8039'))  
+    expect(pv_performance_characterization.open_circuit_voltage).to be_within(0.0001).of(BigDecimal('41.8039'))
+    expect(pv_performance_characterization.voc).to be_within(0.0001).of(BigDecimal('41.8039'))  
 
     expect(pv_performance_characterization.maximum_power_point_voltage).to eq(BigDecimal('35.6460'))
     expect(pv_performance_characterization.vmp).to eq(BigDecimal('35.6460'))
