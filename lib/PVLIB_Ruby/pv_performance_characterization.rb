@@ -37,6 +37,31 @@ class PvPerformanceCharacterization
 
   alias :voc :open_circuit_voltage
 
+  # Vmp
+  def maximum_power_point_voltage
+    @pv_module.maximum_power_point_voltage_0 + @pv_module.performance_coefficients[2] * @pv_module.number_of_cells_in_series * thermal_voltage_per_cell * BigMath.log(@effective_solar_irradiance, 4) + 
+    @pv_module.performance_coefficients[3] * @pv_module.number_of_cells_in_series * (thermal_voltage_per_cell * BigMath.log(@effective_solar_irradiance, 4)).power(2) + 
+    temperature_coefficient_for_maximum_power_point_voltage * (@estimated_cell_temperature - REFERECE_CELL_TEMPERATURE)
+  end
+
+  alias :vmp :maximum_power_point_voltage
+
+  # Ix
+  def fourth_point_current
+    @pv_module.fourth_point_current_0 * (@pv_module.performance_coefficients[4] * @effective_solar_irradiance + @pv_module.performance_coefficients[5] * @effective_solar_irradiance.power(2)) * 
+    (1 + @pv_module.normalized_temperature_coefficient_for_short_circuit_current * (@estimated_cell_temperature - REFERECE_CELL_TEMPERATURE))
+  end
+
+  alias :ix :fourth_point_current
+
+  # Ixx
+  def fifth_point_current
+    @pv_module.fifth_point_current_0 * (@pv_module.performance_coefficients[6] * @effective_solar_irradiance + @pv_module.performance_coefficients[7] * @effective_solar_irradiance.power(2)) * 
+    (1 + @pv_module.normalized_temperature_coefficient_for_maximum_power_point_current * (@estimated_cell_temperature - REFERECE_CELL_TEMPERATURE))
+  end
+
+  alias :ixx :fifth_point_current
+
   private
     # Ee
     def empirical_effective_solar_irradiance(absolute_air_mass, angle_of_incidence, beam_irradiance, ground_irradiance, sky_diffuse_irradiance)
@@ -73,6 +98,11 @@ class PvPerformanceCharacterization
     # BetaVoc
     def temperature_coefficient_for_open_circuit_voltage
       @pv_module.temperature_coefficient_for_open_circuit_voltage + @pv_module.irradiance_dependent_temperature_coefficient_for_open_circuit_voltage * (1-@effective_solar_irradiance)
+    end
+
+    # BetaVmp
+    def temperature_coefficient_for_maximum_power_point_voltage
+      @pv_module.temperature_coefficient_for_maximum_power_point_voltage + @pv_module.irradiance_dependent_temperature_coefficient_for_maximum_power_point_voltage * (1-@effective_solar_irradiance)
     end
 
 end

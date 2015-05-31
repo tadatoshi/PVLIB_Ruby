@@ -58,6 +58,26 @@ class PvModule < ActiveCsv
     BigDecimal(self.mbetavoc.to_s)
   end
 
+  def maximum_power_point_voltage_0
+    BigDecimal(self.vmp0.to_s)
+  end
+
+  def temperature_coefficient_for_maximum_power_point_voltage
+    BigDecimal(self.betavmp.to_s)
+  end
+
+  def irradiance_dependent_temperature_coefficient_for_maximum_power_point_voltage
+    BigDecimal(self.mbetavmp.to_s)
+  end
+
+  def fourth_point_current_0
+    BigDecimal(self.ix0.to_s)
+  end
+
+  def fifth_point_current_0
+    BigDecimal(self.ixx0.to_s)
+  end
+
   private
     def convert_coefficients_to_bigdecimal(coefficients)
       coefficients.map {|coefficient| BigDecimal(coefficient.to_s)}
