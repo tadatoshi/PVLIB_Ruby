@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe PvModule do
 
-  FIXTURES_DIRECTORY = File.expand_path('../../../fixtures', __FILE__)
   MODULE_DATA_FILENAME = "sandia_module_example.csv"
 
   it 'should create model based on CSV data' do
