@@ -24,8 +24,33 @@ class ActiveCsv
 
     data = csv.shift
 
+    previous_header = nil;
+    index = 0;
+
     data.headers.each do |header|
-      self.send("#{header}=".to_sym, data[header]) unless "#{header}=" == "="
+
+      if "#{header}=" == "="
+
+        unless previous_header.blank?
+
+          assigned_data_for_previous_header = self.send(previous_header.to_sym)
+          
+          if assigned_data_for_previous_header.instance_of? Array
+            assigned_data_for_previous_header << data[index]
+            self.send("#{previous_header}=".to_sym, assigned_data_for_previous_header)
+          else
+            self.send("#{previous_header}=".to_sym, [assigned_data_for_previous_header,data[index]])
+          end
+
+        end
+
+      else
+        self.send("#{header}=".to_sym, data[header])
+      end
+
+      previous_header = header unless header.blank?
+      index = index + 1;
+
     end
 
   end  

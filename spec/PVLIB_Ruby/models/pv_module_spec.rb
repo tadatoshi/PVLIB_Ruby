@@ -11,6 +11,7 @@ describe PvModule do
     sandia_pv_module = PvModule.create(module_data_filename)
 
     expect(sandia_pv_module.name).to eq('Sample Module')
+    expect(sandia_pv_module.a).to eq(['-0.0001223', '0.002416', '-0.01912', '0.07365', '0.9259'])
 
   end  
 
