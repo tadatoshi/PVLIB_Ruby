@@ -80,7 +80,7 @@ class PvModule < ActiveCsv
 
   private
     def convert_coefficients_to_bigdecimal(coefficients)
-      coefficients.map {|coefficient| BigDecimal(coefficient.to_s)}
+      coefficients.map {|coefficient| BigDecimal(coefficient.to_s)}.compact
     end
 
 end

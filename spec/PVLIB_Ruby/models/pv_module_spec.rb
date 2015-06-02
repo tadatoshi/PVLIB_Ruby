@@ -12,8 +12,9 @@ describe PvModule do
 
     expect(sandia_pv_module.name).to eq('Sample Module')
     expect(sandia_pv_module.a).to eq(['-0.0001223', '0.002416', '-0.01912', '0.07365', '0.9259'])
+    expect(sandia_pv_module.b).to eq(['-2.99e-09', '5.35e-07', '-3.4e-05', '0.000862', '-0.00699', '1', nil])
 
-  end  
+  end
 
   it 'should create model by specifying parameters' do
 
