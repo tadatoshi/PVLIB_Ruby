@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Inverter do
 
-  INVERTER_DATA_FILENAME = "sandia_inverter_example.csv"
+  INVERTER_DATA_FILENAME = 'sandia_inverter_example.csv'
 
   it 'should create model based on CSV data' do
 
