@@ -1,6 +1,9 @@
 require 'bigdecimal'
 require 'bigdecimal/math'
 
+# This class uses Sandia PV Array Performance Model, which is based on:
+# King, D. et al, 2004, "Sandia Photovoltaic Array Performance Model", SAND Report 3535, Sandia National Laboratories, Albuquerque, NM
+# Other models are realized by subclasses. 
 class PvPerformanceCharacterization
 
   REFERECE_SOLAR_IRRADIANCE = BigDecimal('1000') # E0 [W/m^2]

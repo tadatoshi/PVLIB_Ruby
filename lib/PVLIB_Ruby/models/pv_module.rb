@@ -1,5 +1,7 @@
 require 'bigdecimal'
 
+# This is a model in model-view-controller design pattern. 
+# In this case, it is expending ActiveCsv, i.e. it is analogous to ActiveRecord. Hence, it's a placeholder for data from CSV file. 
 class PvModule < ActiveCsv
 
   attr_accessor :name, :vintage, :material, :area, :alphaisc, :alphaimp, :isc0, :imp0, :voc0, :vmp0 

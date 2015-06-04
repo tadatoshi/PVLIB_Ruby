@@ -5,6 +5,8 @@ require 'pvlib_ruby/models/pv_module'
 require 'pvlib_ruby/models/inverter'
 require 'pvlib_ruby/pv_performance_characterization'
 require 'pvlib_ruby/dc_to_ac_conversion'
+require 'pvlib_ruby/calculation_helper'
+require 'pvlib_ruby/air_mass'
 
 module PvlibRuby
   # Your code goes here...

@@ -1,5 +1,7 @@
 require 'bigdecimal'
 
+# This is a model in model-view-controller design pattern. 
+# In this case, it is expending ActiveCsv, i.e. it is analogous to ActiveRecord. Hence, it's a placeholder for data from CSV file. 
 class Inverter < ActiveCsv
   
   attr_accessor :name, :vac, :pac0, :pdc0, :vdc0, :ps0, :c0, :c1, :c2, :c3 

@@ -1,5 +1,9 @@
 require 'bigdecimal'
 
+# This class uses Sandia's Grid-Connected PV Inverter model, which is based on:
+# SAND2007-5036, "Performance Model for Grid-Connected Photovoltaic Inverters by D. King, S. Gonzalez, G. Galbraith, W. Boyson
+# Since this paper was not available any more, we referred to https://pvpmc.sandia.gov/modeling-steps/dc-to-ac-conversion/sandia-inverter-model/
+# Other inverter models are realized by subclasses. 
 class DcToAcConversion
 
   def initialize(inverter)  

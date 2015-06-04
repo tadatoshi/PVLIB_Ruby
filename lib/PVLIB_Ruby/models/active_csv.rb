@@ -1,6 +1,8 @@
 require 'active_model'
 require 'csv'
 
+# This is a model in model-view-controller design pattern. 
+# It is analogous to ActiveRecord. Hence, it's a placeholder for data from CSV file. 
 # Borrowed the idea from "http://kyle.conarro.com/importing-from-csv-in-rails".
 class ActiveCsv
   include ActiveModel::Model
