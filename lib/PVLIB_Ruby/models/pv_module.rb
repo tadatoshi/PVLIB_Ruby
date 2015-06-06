@@ -80,6 +80,18 @@ class PvModule < ActiveCsv
     BigDecimal(self.ixx0.to_s)
   end
 
+  def temperature_upper_limit_coefficient
+    BigDecimal(self.a_wind.to_s)
+  end
+
+  def wind_speed_decrease_rate_coefficient
+    BigDecimal(self.b_wind.to_s)
+  end
+
+  def cell_module_back_surface_temperature_difference
+    BigDecimal(self.delt.to_s)
+  end
+
   private
     def convert_coefficients_to_bigdecimal(coefficients)
       coefficients.map {|coefficient| BigDecimal(coefficient.to_s)}.compact

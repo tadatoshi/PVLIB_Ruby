@@ -7,6 +7,7 @@ require 'pvlib_ruby/pv_performance_characterization'
 require 'pvlib_ruby/dc_to_ac_conversion'
 require 'pvlib_ruby/calculation_helper'
 require 'pvlib_ruby/air_mass'
+require 'pvlib_ruby/pv_temperature'
 
 module PvlibRuby
   # Your code goes here...

@@ -8,4 +8,8 @@ module CalculationHelper
     radian * BigDecimal('180') / BigDecimal(Math::PI.to_s)
   end
 
+  def bigdecimal_exp(bigdecimal_value)
+    BigDecimal(Math.exp(bigdecimal_value.to_f).to_s)
+  end
+
 end
