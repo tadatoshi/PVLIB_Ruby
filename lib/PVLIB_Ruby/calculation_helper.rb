@@ -12,4 +12,16 @@ module CalculationHelper
     BigDecimal(Math.exp(bigdecimal_value.to_f).to_s)
   end
 
+  def bigdecimal_cos(angle_in_radian)
+    BigDecimal(Math.cos(angle_in_radian.to_f).to_s)
+  end 
+
+  def bigdecimal_sin(angle_in_radian)
+    BigDecimal(Math.sin(angle_in_radian.to_f).to_s)
+  end
+
+  def bigdecimal_sqrt(bigdecimal_value)
+    BigDecimal(Math.sqrt(bigdecimal_value.to_f).to_s)
+  end
+
 end

@@ -15,13 +15,10 @@ angle_of_incidence = BigDecimal('10.8703')
 beam_irradiance = BigDecimal('619.9822')
 ground_irradiance = BigDecimal('11.6927')
 sky_diffuse_irradiance = BigDecimal('464.8004')
-
 solar_irradiance_incident_on_module_surface = BigDecimal('1096.5')
 reference_solar_irradiance = BigDecimal('1000')
 wind_speed = BigDecimal('2.8786')
 air_temperature = BigDecimal('20.7700')
-
-estimated_cell_temperature = BigDecimal('47.7235')
 
 sandia_module_data_filepath = File.join(DATA_DIRECTORY, 'sandia_module_example.csv')
 sandia_pv_module = PvModule.create(sandia_module_data_filepath)
