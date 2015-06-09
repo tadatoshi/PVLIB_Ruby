@@ -9,16 +9,37 @@ require 'bigdecimal'
 DATA_DIRECTORY = File.expand_path('../data', __FILE__)
 
 # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-sun_zenith = BigDecimal('45.7486')
-pressure = BigDecimal('62963')
+direct_normal_irradiance = BigDecimal('631.3100')
+global_horizontal_irradiance = BigDecimal('862.0619')
+diffuse_horizontal_irradiance = BigDecimal('405.3100')
+extraterrestrial_irradiance = BigDecimal('1380.7')
+albedo = BigDecimal('0.1500')
 angle_of_incidence = BigDecimal('10.8703')
-beam_irradiance = BigDecimal('619.9822')
-ground_irradiance = BigDecimal('11.6927')
-sky_diffuse_irradiance = BigDecimal('464.8004')
-solar_irradiance_incident_on_module_surface = BigDecimal('1096.5')
+array_tilt = BigDecimal('35')
+array_azimuth = BigDecimal('180')    
+sun_zenith = BigDecimal('45.7486')
+sun_azimuth = BigDecimal('182.5229')
+pressure = BigDecimal('62963')
 reference_solar_irradiance = BigDecimal('1000')
 wind_speed = BigDecimal('2.8786')
 air_temperature = BigDecimal('20.7700')
+
+plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+
+beam_irradiance = plain_of_array_irradiance.beam_irradiance
+ground_diffuse_irradiance = plain_of_array_irradiance.ground_diffuse_irradiance
+sky_diffuse_irradiance = plain_of_array_irradiance.sky_diffuse_irradiance
+
+puts "----- Plain Of Array (POA) Irradiance -----"
+puts "  Beam Irradiance [W/m^2]: #{beam_irradiance.round(4).to_s('F')}" # Matches to 619.9822 for 360th row in PVSC40Tutorial_Master
+puts "  Ground Diffuse Irradiance [W/m^2]: #{ground_diffuse_irradiance.round(4).to_s('F')}" # Matches to 11.6927 for 360th row in PVSC40Tutorial_Master
+puts "  Sky Diffuse Irradiance [W/m^2]: #{sky_diffuse_irradiance.round(4).to_s('F')}" # Slight difference from 464.8004 for 360th row in PVSC40Tutorial_Master
+                                                                                      # This is because PVLIB_MatLab converts Global Horizontal Irradiance (GHI) less than 0.000001 to 0.000001 
+                                                                                      # in order to avoid division by 0. In our case with BigDecimal, we don't have to worry about it. 
+puts "-------------------------------------------"
+puts ""
+
+solar_irradiance_incident_on_module_surface = beam_irradiance + ground_diffuse_irradiance + sky_diffuse_irradiance
 
 sandia_module_data_filepath = File.join(DATA_DIRECTORY, 'sandia_module_example.csv')
 sandia_pv_module = PvModule.create(sandia_module_data_filepath)
@@ -43,7 +64,7 @@ puts ""
 absolute_air_mass = air_mass.absolute_air_mass
 
 pv_performance_characterization = PvPerformanceCharacterization.new(sandia_pv_module, absolute_air_mass, angle_of_incidence, 
-                                                                    beam_irradiance, ground_irradiance, sky_diffuse_irradiance, 
+                                                                    beam_irradiance, ground_diffuse_irradiance, sky_diffuse_irradiance, 
                                                                     estimated_cell_temperature)
 
 puts "--- PV module IV curve characterization ---"
