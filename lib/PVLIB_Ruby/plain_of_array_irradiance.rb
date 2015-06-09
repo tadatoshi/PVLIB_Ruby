@@ -12,6 +12,8 @@ require 'bigdecimal'
 class PlainOfArrayIrradiance
   include CalculationHelper
 
+  SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE = BigDecimal('0.000001') # In order to make the calculated value consistent with the one by PVLIB_MatLab
+
   def initialize(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, surface_tilt, surface_azimuth, sun_zenith, sun_azimuth)
     @direct_normal_irradiance = direct_normal_irradiance           # DNI
     @global_horizontal_irradiance = global_horizontal_irradiance   # GHI
@@ -74,7 +76,12 @@ class PlainOfArrayIrradiance
     # f: Horizontal brighting correction factor
     #   page 13 of [3]
     def horizontal_brighting_correction_factor
-      adjusted_global_horizontal_irradiance = @global_horizontal_irradiance < 0 ? BigDecimal('0') : @global_horizontal_irradiance
+      adjusted_global_horizontal_irradiance = @global_horizontal_irradiance < SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE ? SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE : @global_horizontal_irradiance
+      # In PVLIB_MatLab as well as PVLIB_Python, there is a following adjustment. 
+      # However, all the negative numbers are already converted to SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE in the above statement, 
+      # the following statement doesn't do anything. 
+      # I'm just writing it to remind that it is there in PVLIB_MatLab and PVLIB_Python. 
+      # adjusted_global_horizontal_irradiance = @global_horizontal_irradiance < BigDecimal('0') ? BigDecimal('0') : @global_horizontal_irradiance
       bigdecimal_sqrt(horizontal_beam_irradiance / adjusted_global_horizontal_irradiance)
     end
 

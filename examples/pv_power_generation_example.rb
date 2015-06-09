@@ -34,8 +34,7 @@ puts "----- Plain Of Array (POA) Irradiance -----"
 puts "  Beam Irradiance [W/m^2]: #{beam_irradiance.round(4).to_s('F')}" # Matches to 619.9822 for 360th row in PVSC40Tutorial_Master
 puts "  Ground Diffuse Irradiance [W/m^2]: #{ground_diffuse_irradiance.round(4).to_s('F')}" # Matches to 11.6927 for 360th row in PVSC40Tutorial_Master
 puts "  Sky Diffuse Irradiance [W/m^2]: #{sky_diffuse_irradiance.round(4).to_s('F')}" # Slight difference from 464.8004 for 360th row in PVSC40Tutorial_Master
-                                                                                      # This is because PVLIB_MatLab converts Global Horizontal Irradiance (GHI) less than 0.000001 to 0.000001 
-                                                                                      # in order to avoid division by 0. In our case with BigDecimal, we don't have to worry about it. 
+                                                                                      # due to the slightly different calcuation result from horizontal_beam_irradiance method. 
 puts "-------------------------------------------"
 puts ""
 
@@ -47,8 +46,8 @@ sandia_pv_module = PvModule.create(sandia_module_data_filepath)
 pv_temperature = PvTemperature.new(sandia_pv_module, solar_irradiance_incident_on_module_surface, reference_solar_irradiance, wind_speed, air_temperature)
 
 puts "------------- PV temperature --------------"
-puts "  Estimated Cell Temperature [ºC]: #{pv_temperature.cell_temperature.round(4).to_s('F')}" # Slight difference from 47.7235 for 360th row in PVSC40Tutorial_Master
-puts "  Estimated Module Temperature [ºC]: #{pv_temperature.module_temperature.round(4).to_s('F')}" # Slight difference from 44.4341 for 360th row in PVSC40Tutorial_Master
+puts "  Estimated Cell Temperature [ºC]: #{pv_temperature.cell_temperature.round(4).to_s('F')}" # Matches to 47.7235 for 360th row in PVSC40Tutorial_Master
+puts "  Estimated Module Temperature [ºC]: #{pv_temperature.module_temperature.round(4).to_s('F')}" # Matches to 44.4341 for 360th row in PVSC40Tutorial_Master
 puts "-------------------------------------------"
 puts ""
 
