@@ -4,6 +4,11 @@ require 'bigdecimal'
 # Other models are realized by subclasses. 
 #
 # References
+#   [1] Loutzenhiser P.G. et. al. "Empirical validation of models to compute
+#   solar irradiance on inclined surfaces for building energy simulation"
+#   2007, Solar Energy vol. 81. pp. 254-267
+#   [2] Reindl, D.T., Beckmann, W.A., Duffie, J.A., 1990a. Diffuse fraction
+#   correlations. Solar Energy 45 (1), 17.
 #   [3] Reindl, D.T., Beckmann, W.A., Duffie, J.A., 1990b. Evaluation of hourly
 #   tilted surface radiation models. Solar Energy 45 (1), 917.
 # 
@@ -36,6 +41,8 @@ class PlainOfArrayIrradiance
   end
 
   # Based on the equation (5) of [3]
+  # The comment in PVLIB_MatLab says it's based on the modified version of the equation (8) of [1]. 
+  # But I observe that the code is exactly same as the equation (5) of [3]. 
   def sky_diffuse_irradiance
     @diffuse_horizontal_irradiance * (anisotropy_index * geometric_factor + 
                                       (1 - anisotropy_index) * ((BigDecimal('1') + bigdecimal_cos(degree_to_radian(@surface_tilt))) / BigDecimal('2')) * anisotropic_correction_factor)
