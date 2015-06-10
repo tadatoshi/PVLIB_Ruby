@@ -11,19 +11,21 @@ require 'bigdecimal'
 #   correlations. Solar Energy 45 (1), 17.
 #   [3] Reindl, D.T., Beckmann, W.A., Duffie, J.A., 1990b. Evaluation of hourly
 #   tilted surface radiation models. Solar Energy 45 (1), 917.
+#   [4] Solar radiation basics http://solardat.uoregon.edu/SolarRadiationBasics.html
 # 
 # TODO: Consider to pass necessary parameters to the respective methods instead of passing all of them to the constructor. 
 #       Haven't decided which way would be better. 
 class PlainOfArrayIrradiance
   include CalculationHelper
 
+  AVEARGE_EXTRATERRESTRIAL_IRRADIANCE = BigDecimal('1367') # [W/m^2]
   SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE = BigDecimal('0.000001') # In order to make the calculated value consistent with the one by PVLIB_MatLab
 
-  def initialize(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, surface_tilt, surface_azimuth, sun_zenith, sun_azimuth)
-    @direct_normal_irradiance = direct_normal_irradiance           # DNI
-    @global_horizontal_irradiance = global_horizontal_irradiance   # GHI
-    @diffuse_horizontal_irradiance = diffuse_horizontal_irradiance # DHI
-    @extraterrestrial_irradiance = extraterrestrial_irradiance
+  def initialize(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, surface_tilt, surface_azimuth, sun_zenith, sun_azimuth)
+    @direct_normal_irradiance = direct_normal_irradiance           # DNI [W/m^2]
+    @global_horizontal_irradiance = global_horizontal_irradiance   # GHI [W/m^2]
+    @diffuse_horizontal_irradiance = diffuse_horizontal_irradiance # DHI [W/m^2]
+    @day_of_year = day_of_year
     @albedo = albedo
     @angle_of_incidence = angle_of_incidence
     @surface_tilt = surface_tilt
@@ -46,6 +48,16 @@ class PlainOfArrayIrradiance
   def sky_diffuse_irradiance
     @diffuse_horizontal_irradiance * (anisotropy_index * geometric_factor + 
                                       (1 - anisotropy_index) * ((BigDecimal('1') + bigdecimal_cos(degree_to_radian(@surface_tilt))) / BigDecimal('2')) * anisotropic_correction_factor)
+  end
+
+  # This is used only for calculating Sky Diffuse Irradiance. 
+  # But it's made public method just in case some other code needs it. 
+  # Reference: [4]
+  def extraterrestrial_irradiance
+    earth_orbit_angle_in_radian = BigDecimal('2') * BigDecimal(Math::PI.to_s) * @day_of_year / BigDecimal('365')
+    sun_earth_distance_factor_square = BigDecimal('1.00011') + BigDecimal('0.034221') * bigdecimal_cos(earth_orbit_angle_in_radian) + BigDecimal('0.001280') * bigdecimal_sin(earth_orbit_angle_in_radian) +
+                                       BigDecimal('0.000719') * bigdecimal_cos(BigDecimal('2') * earth_orbit_angle_in_radian) + BigDecimal('0.000077') * bigdecimal_sin(BigDecimal('2') * earth_orbit_angle_in_radian)
+    AVEARGE_EXTRATERRESTRIAL_IRRADIANCE * sun_earth_distance_factor_square
   end
 
   private
@@ -72,7 +84,7 @@ class PlainOfArrayIrradiance
     # AI
     #   "defines the portion of the diffuse radiation to be treated as circumsolar with the remaining portion considered isotropic"[3]
     def anisotropy_index
-      @direct_normal_irradiance / @extraterrestrial_irradiance
+      @direct_normal_irradiance / extraterrestrial_irradiance
     end
 
     def anisotropic_correction_factor

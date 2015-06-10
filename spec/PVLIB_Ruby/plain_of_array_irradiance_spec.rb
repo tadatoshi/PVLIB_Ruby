@@ -8,7 +8,7 @@ describe PlainOfArrayIrradiance do
     direct_normal_irradiance = BigDecimal('631.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     global_horizontal_irradiance = BigDecimal('862.0619') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     diffuse_horizontal_irradiance = BigDecimal('405.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-    extraterrestrial_irradiance = BigDecimal('1380.7') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+    day_of_year = BigDecimal('294') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     albedo = BigDecimal('0.1500')
     angle_of_incidence = BigDecimal('10.8703') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     array_tilt = BigDecimal('35')
@@ -16,7 +16,7 @@ describe PlainOfArrayIrradiance do
     sun_zenith = BigDecimal('45.7486') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     sun_azimuth = BigDecimal('182.5229') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
-    plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+    plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
 
     # Expected values are for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     expect(plain_of_array_irradiance.beam_irradiance).to be_within(0.0001).of(BigDecimal('619.9822'))
@@ -28,7 +28,7 @@ describe PlainOfArrayIrradiance do
     direct_normal_irradiance = BigDecimal('631.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     global_horizontal_irradiance = BigDecimal('862.0619') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     diffuse_horizontal_irradiance = BigDecimal('405.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-    extraterrestrial_irradiance = BigDecimal('1380.7') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+    day_of_year = BigDecimal('294') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     albedo = BigDecimal('0.1500')
     angle_of_incidence = BigDecimal('10.8703') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     array_tilt = BigDecimal('35')
@@ -36,7 +36,7 @@ describe PlainOfArrayIrradiance do
     sun_zenith = BigDecimal('45.7486') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     sun_azimuth = BigDecimal('182.5229') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
-    plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+    plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
 
     # Expected values are for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     expect(plain_of_array_irradiance.ground_diffuse_irradiance).to be_within(0.0001).of(BigDecimal('11.6927'))
@@ -50,7 +50,7 @@ describe PlainOfArrayIrradiance do
       direct_normal_irradiance = BigDecimal('631.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       global_horizontal_irradiance = BigDecimal('862.0619') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       diffuse_horizontal_irradiance = BigDecimal('405.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-      extraterrestrial_irradiance = BigDecimal('1380.7') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      day_of_year = BigDecimal('294') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       albedo = BigDecimal('0.1500')
       angle_of_incidence = BigDecimal('10.8703') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       array_tilt = BigDecimal('35')
@@ -58,7 +58,7 @@ describe PlainOfArrayIrradiance do
       sun_zenith = BigDecimal('45.7486') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       sun_azimuth = BigDecimal('182.5229') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
-      plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+      plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
             
       # Expected values are for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       expect(plain_of_array_irradiance.send(:hourly_beam_radiation_on_tilted_surface)).to be_within(0.0001).of(BigDecimal('0.9821'))      
@@ -71,12 +71,31 @@ describe PlainOfArrayIrradiance do
 
     end
 
+    it 'should calculate extraterrestrial irradiance' do
+
+      direct_normal_irradiance = BigDecimal('631.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      global_horizontal_irradiance = BigDecimal('862.0619') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      diffuse_horizontal_irradiance = BigDecimal('405.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      day_of_year = BigDecimal('294') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      albedo = BigDecimal('0.1500')
+      angle_of_incidence = BigDecimal('10.8703') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      array_tilt = BigDecimal('35')
+      array_azimuth = BigDecimal('180') 
+      sun_zenith = BigDecimal('45.7486') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      sun_azimuth = BigDecimal('182.5229') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+
+      plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+
+      expect(plain_of_array_irradiance.extraterrestrial_irradiance).to be_within(0.1).of(BigDecimal('1380.7'))            
+
+    end
+
     it 'should calculate Plain of Array Sky Diffuse Irradiance' do
 
       direct_normal_irradiance = BigDecimal('631.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       global_horizontal_irradiance = BigDecimal('862.0619') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       diffuse_horizontal_irradiance = BigDecimal('405.3100') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-      extraterrestrial_irradiance = BigDecimal('1380.7') # [W/m^2] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
+      day_of_year = BigDecimal('294') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       albedo = BigDecimal('0.1500')
       angle_of_incidence = BigDecimal('10.8703') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       array_tilt = BigDecimal('35')
@@ -84,7 +103,7 @@ describe PlainOfArrayIrradiance do
       sun_zenith = BigDecimal('45.7486') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       sun_azimuth = BigDecimal('182.5229') # [º] for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       
-      plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+      plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
 
       # Expected values are for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       # Note: Got ''0.4647980105 ...E3' Only minor difference. 
