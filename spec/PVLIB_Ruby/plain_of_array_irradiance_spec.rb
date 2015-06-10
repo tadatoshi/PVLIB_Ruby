@@ -106,8 +106,7 @@ describe PlainOfArrayIrradiance do
       plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
 
       # Expected values are for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
-      # Note: Got ''0.4647980105 ...E3' Only minor difference. 
-      expect(plain_of_array_irradiance.sky_diffuse_irradiance).to be_within(0.003).of(BigDecimal('464.8004'))
+      expect(plain_of_array_irradiance.sky_diffuse_irradiance).to be_within(0.0001).of(BigDecimal('464.8004'))
 
     end
 

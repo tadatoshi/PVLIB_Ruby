@@ -12,7 +12,7 @@ DATA_DIRECTORY = File.expand_path('../data', __FILE__)
 direct_normal_irradiance = BigDecimal('631.3100')
 global_horizontal_irradiance = BigDecimal('862.0619')
 diffuse_horizontal_irradiance = BigDecimal('405.3100')
-extraterrestrial_irradiance = BigDecimal('1380.7')
+day_of_year = BigDecimal('294')
 albedo = BigDecimal('0.1500')
 angle_of_incidence = BigDecimal('10.8703')
 array_tilt = BigDecimal('35')
@@ -24,7 +24,7 @@ reference_solar_irradiance = BigDecimal('1000')
 wind_speed = BigDecimal('2.8786')
 air_temperature = BigDecimal('20.7700')
 
-plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, extraterrestrial_irradiance, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
 
 beam_irradiance = plain_of_array_irradiance.beam_irradiance
 ground_diffuse_irradiance = plain_of_array_irradiance.ground_diffuse_irradiance
@@ -33,8 +33,7 @@ sky_diffuse_irradiance = plain_of_array_irradiance.sky_diffuse_irradiance
 puts "----- Plain Of Array (POA) Irradiance -----"
 puts "  Beam Irradiance [W/m^2]: #{beam_irradiance.round(4).to_s('F')}" # Matches to 619.9822 for 360th row in PVSC40Tutorial_Master
 puts "  Ground Diffuse Irradiance [W/m^2]: #{ground_diffuse_irradiance.round(4).to_s('F')}" # Matches to 11.6927 for 360th row in PVSC40Tutorial_Master
-puts "  Sky Diffuse Irradiance [W/m^2]: #{sky_diffuse_irradiance.round(4).to_s('F')}" # Slight difference from 464.8004 for 360th row in PVSC40Tutorial_Master
-                                                                                      # due to the slightly different calcuation result from horizontal_beam_irradiance method. 
+puts "  Sky Diffuse Irradiance [W/m^2]: #{sky_diffuse_irradiance.round(4).to_s('F')}" # Matches to 464.8004 for 360th row in PVSC40Tutorial_Master
 puts "-------------------------------------------"
 puts ""
 
@@ -46,7 +45,7 @@ sandia_pv_module = PvModule.create(sandia_module_data_filepath)
 pv_temperature = PvTemperature.new(sandia_pv_module, solar_irradiance_incident_on_module_surface, reference_solar_irradiance, wind_speed, air_temperature)
 
 puts "------------- PV temperature --------------"
-puts "  Estimated Cell Temperature [ºC]: #{pv_temperature.cell_temperature.round(4).to_s('F')}" # Matches to 47.7235 for 360th row in PVSC40Tutorial_Master
+puts "  Estimated Cell Temperature [ºC]: #{pv_temperature.cell_temperature.round(4).to_s('F')}" # Slight difference from 47.7235 for 360th row in PVSC40Tutorial_Master
 puts "  Estimated Module Temperature [ºC]: #{pv_temperature.module_temperature.round(4).to_s('F')}" # Matches to 44.4341 for 360th row in PVSC40Tutorial_Master
 puts "-------------------------------------------"
 puts ""
