@@ -9,6 +9,7 @@ require 'pvlib_ruby/calculation_helper'
 require 'pvlib_ruby/air_mass'
 require 'pvlib_ruby/pv_temperature'
 require 'pvlib_ruby/plain_of_array_irradiance'
+require 'pvlib_ruby/solar_geometry'
 
 module PvlibRuby
   # Your code goes here...

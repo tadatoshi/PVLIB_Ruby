@@ -20,6 +20,18 @@ module CalculationHelper
     BigDecimal(Math.sin(angle_in_radian.to_f).to_s)
   end
 
+  def bigdecimal_sin(angle_in_radian)
+    BigDecimal(Math.sin(angle_in_radian.to_f).to_s)
+  end
+  
+  def big_decimal_asin(sin_value)
+    BigDecimal(Math.asin(sin_value).to_s)
+  end
+
+  def big_decimal_acos(cos_value)
+    BigDecimal(Math.acos(cos_value).to_s)
+  end
+
   def bigdecimal_sqrt(bigdecimal_value)
     BigDecimal(Math.sqrt(bigdecimal_value.to_f).to_s)
   end
