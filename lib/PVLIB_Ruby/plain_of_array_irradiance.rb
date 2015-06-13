@@ -60,6 +60,19 @@ class PlainOfArrayIrradiance
     AVEARGE_EXTRATERRESTRIAL_IRRADIANCE * sun_earth_distance_factor_square
   end
 
+  def angle_of_incidence
+    cosine_of_angle_of_incidence = bigdecimal_cos(degree_to_radian(@sun_zenith)) * bigdecimal_cos(degree_to_radian(@surface_tilt)) + 
+                                bigdecimal_sin(degree_to_radian(@surface_tilt)) * bigdecimal_sin(degree_to_radian(@sun_zenith)) * bigdecimal_cos(degree_to_radian(@sun_azimuth - @surface_azimuth))
+
+    if cosine_of_angle_of_incidence > BigDecimal('1')
+      cosine_of_angle_of_incidence = BigDecimal('1')
+    elsif cosine_of_angle_of_incidence < BigDecimal('-1')
+      cosine_of_angle_of_incidence = BigDecimal('-1')
+    end
+
+    radian_to_degree(big_decimal_acos(cosine_of_angle_of_incidence))
+  end  
+
   private
     # Rb 
     # Reference:
