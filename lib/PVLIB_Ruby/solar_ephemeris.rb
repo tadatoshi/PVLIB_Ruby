@@ -21,7 +21,8 @@ class SolarEphemeris
   end
 
   def sun_elevation
-
+    radian_to_degree(bigdecimal_asin(bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(declination)) * bigdecimal_cos(degree_to_radian(hour_angle)) + 
+                                     bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_sin(degree_to_radian(declination))))
   end
 
   def apparent_sun_elevation
