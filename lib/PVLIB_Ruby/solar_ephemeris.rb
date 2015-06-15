@@ -21,12 +21,13 @@ class SolarEphemeris
   end
 
   def sun_elevation
-    radian_to_degree(bigdecimal_asin(bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(declination)) * bigdecimal_cos(degree_to_radian(hour_angle)) + 
-                                     bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_sin(degree_to_radian(declination))))
+    # Caching because it's used several times for the calculation of apparent_sun_elevation
+    @sun_elevation ||= radian_to_degree(bigdecimal_asin(bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(declination)) * bigdecimal_cos(degree_to_radian(hour_angle)) + 
+                                                        bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_sin(degree_to_radian(declination))))
   end
 
   def apparent_sun_elevation
-
+    sun_elevation + reflaction
   end
 
   def solar_time
@@ -114,6 +115,23 @@ class SolarEphemeris
       year_starting_from_1900 = BigDecimal(@time.year.to_s) - BigDecimal('1900')
       year_begin = BigDecimal('365') * year_starting_from_1900 + ((year_starting_from_1900 - BigDecimal('1')) / BigDecimal('4')).floor - BigDecimal('0.5')
       year_begin + @universal_date
+    end
+
+    # For apparent_sun_elevation calculation
+    def reflaction
+      tangent_of_elevation = bigdecimal_tan(degree_to_radian(sun_elevation))
+
+      raw_reflaction = if sun_elevation > BigDecimal('5') && sun_elevation <= BigDecimal('85')
+                         BigDecimal('58.1') / tangent_of_elevation - BigDecimal('0.07') / (tangent_of_elevation.power(3)) + BigDecimal('.000086') / (tangent_of_elevation.power(5))
+                       elsif sun_elevation > BigDecimal('-0.575') && sun_elevation <= BigDecimal('5')
+                         sun_elevation * (BigDecimal('-518.2') + sun_elevation * (BigDecimal('103.4') + sun_elevation * (BigDecimal('-12.79') + sun_elevation * BigDecimal('0.711')))) + BigDecimal('1735')
+                       elsif sun_elevation > BigDecimal('-1') && sun_elevation <= BigDecimal('-0.575')
+                         BigDecimal('-20.774') / tangent_of_elevation
+                       else
+                         BigDecimal('0')
+                       end
+ 
+      raw_reflaction * (BigDecimal('283') / (BigDecimal('273') + @temperature)) * @pressure / BigDecimal('101325') / BigDecimal('3600')
     end
 
 end
