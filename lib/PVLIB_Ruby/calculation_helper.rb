@@ -24,15 +24,15 @@ module CalculationHelper
     BigDecimal(Math.tan(angle_in_radian.to_f).to_s)
   end
   
-  def big_decimal_asin(sin_value)
+  def bigdecimal_asin(sin_value)
     BigDecimal(Math.asin(sin_value.to_f).to_s)
   end
 
-  def big_decimal_acos(cos_value)
+  def bigdecimal_acos(cos_value)
     BigDecimal(Math.acos(cos_value.to_f).to_s)
   end
 
-  def big_decimal_atan2(y, x)
+  def bigdecimal_atan2(y, x)
     BigDecimal(Math.atan2(y.to_f, x.to_f).to_s)
   end
 

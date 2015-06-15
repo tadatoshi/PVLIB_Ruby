@@ -16,8 +16,8 @@ class SolarEphemeris
   end
 
   def sun_azimuth
-    radian_to_degree(big_decimal_atan2(BigDecimal('-1') * big_decimal_sin(degree_to_radian(hour_angle)), 
-                                       big_decimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_tan(degree_to_radian(declination)) - big_decimal_sin(degree_to_radian(@location.latitude)) * big_decimal_cos(degree_to_radian(hour_angle))))
+    radian_to_degree(bigdecimal_atan2(BigDecimal('-1') * bigdecimal_sin(degree_to_radian(hour_angle)), 
+                                      bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_tan(degree_to_radian(declination)) - bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(hour_angle))))
   end
 
   def sun_elevation
@@ -38,7 +38,7 @@ class SolarEphemeris
     end
 
     def declination
-
+      radian_to_degree(bigdecimal_asin(bigdecimal_sin(degree_to_radian(obliquity)) * bigdecimal_sin(degree_to_radian(ec_lon))))
     end
 
     # For hour_angle calculation
@@ -59,7 +59,7 @@ class SolarEphemeris
     # RtAscen in PVLIB_MatLab. Couldn't find what it stands for. 
     # Also for other variables names, couldn't find what they stand for. 
     def rt_ascen
-      radian_to_degree(big_decimal_atan2(bigdecimal_cos(degree_to_radian(obliquity)) * bigdecimal_sin(degree_to_radian(ec_lon)), bigdecimal_cos(degree_to_radian(ec_lon))))
+      radian_to_degree(bigdecimal_atan2(bigdecimal_cos(degree_to_radian(obliquity)) * bigdecimal_sin(degree_to_radian(ec_lon)), bigdecimal_cos(degree_to_radian(ec_lon))))
     end
 
     def obliquity
@@ -77,7 +77,7 @@ class SolarEphemeris
     def true_anom
       # Cannot find a proper name for these values:
       temp1 = ((BigDecimal('1') + eccen) / (BigDecimal('1') - eccen)).power(0.5) * bigdecimal_tan(degree_to_radian(eccen_anom / BigDecimal('2')))
-      temp2 = radian_to_degree(big_decimal_atan2(temp1, BigDecimal('1')))
+      temp2 = radian_to_degree(bigdecimal_atan2(temp1, BigDecimal('1')))
       BigDecimal('2') * temp2.modulo(BigDecimal('360'))
     end
 

@@ -70,7 +70,7 @@ class PlainOfArrayIrradiance
       cosine_of_angle_of_incidence = BigDecimal('-1')
     end
 
-    radian_to_degree(big_decimal_acos(cosine_of_angle_of_incidence))
+    radian_to_degree(bigdecimal_acos(cosine_of_angle_of_incidence))
   end  
 
   private
