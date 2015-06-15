@@ -31,7 +31,13 @@ class SolarEphemeris
   end
 
   def solar_time
+    # BigDecimal#sign returns 2 for positive value, -2 for negative value, 1 for 0 and -1 for -0. 
+    # Hence, decided to use the following statement: 
+    hour_angle_sign = hour_angle < BigDecimal('0') ? BigDecimal('-1') : BigDecimal('1')
 
+    adjusted_hour_angle = hour_angle.abs > BigDecimal('180') ? hour_angle - (BigDecimal('360') * hour_angle_sign) : hour_angle
+
+    (BigDecimal('180') + adjusted_hour_angle) / BigDecimal('15')
   end
 
   private
