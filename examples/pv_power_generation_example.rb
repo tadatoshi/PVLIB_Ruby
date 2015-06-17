@@ -13,24 +13,54 @@ direct_normal_irradiance = BigDecimal('631.3100')
 global_horizontal_irradiance = BigDecimal('862.0619')
 diffuse_horizontal_irradiance = BigDecimal('405.3100')
 day_of_year = BigDecimal('294')
+utc_offset = '-07:00'
+# TODO: Get time from year and day_of_year:
+time = Time.new(2008, 10, 20, 11, 58, 12, utc_offset)
 albedo = BigDecimal('0.1500')
-angle_of_incidence = BigDecimal('10.8703')
 array_tilt = BigDecimal('35')
-array_azimuth = BigDecimal('180')    
+array_azimuth = BigDecimal('180')   
+
 sun_zenith = BigDecimal('45.7486')
 sun_azimuth = BigDecimal('182.5229')
+
+
+
+latitude = BigDecimal('35.0500')
+longitude = BigDecimal('-106.5400')
+altitude = BigDecimal('1660')
+location = Location.new(latitude, longitude, altitude)
+
 pressure = BigDecimal('62963')
 reference_solar_irradiance = BigDecimal('1000')
 wind_speed = BigDecimal('2.8786')
 air_temperature = BigDecimal('20.7700')
 
-plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+
+
+solar_ephemeris = SolarEphemeris.new(time, location, pressure: pressure, temperature: air_temperature)
+
+sun_azimuth = solar_ephemeris.sun_azimuth
+apparent_sun_elevation = solar_ephemeris.apparent_sun_elevation
+
+puts "------------- Solar Ephemeris -------------"
+puts "  Sun Azimuth [º]: #{sun_azimuth.round(4).to_s('F')}" # TODO: Doesn't Match to 182.5229 for 360th row in PVSC40Tutorial_Master
+puts "  Apparent Sun Elevation [º]: #{sun_zenith.round(4).to_s('F')}" # for 360th row in PVSC40Tutorial_Master
+puts "-------------------------------------------"
+puts ""
+
+sun_azimuth = BigDecimal('90') - apparent_sun_elevation
+
+plain_of_array_irradiance = PlainOfArrayIrradiance.new(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, array_tilt, array_azimuth, sun_zenith, sun_azimuth)    
+
+angle_of_incidence = plain_of_array_irradiance.angle_of_incidence
 
 beam_irradiance = plain_of_array_irradiance.beam_irradiance
 ground_diffuse_irradiance = plain_of_array_irradiance.ground_diffuse_irradiance
 sky_diffuse_irradiance = plain_of_array_irradiance.sky_diffuse_irradiance
 
 puts "----- Plain Of Array (POA) Irradiance -----"
+puts "  Angle of Incidence [º]: #{angle_of_incidence.round(4).to_s('F')}" # Matches to 10.8703 for 360th row in PVSC40Tutorial_Master
+puts ""
 puts "  Beam Irradiance [W/m^2]: #{beam_irradiance.round(4).to_s('F')}" # Matches to 619.9822 for 360th row in PVSC40Tutorial_Master
 puts "  Ground Diffuse Irradiance [W/m^2]: #{ground_diffuse_irradiance.round(4).to_s('F')}" # Matches to 11.6927 for 360th row in PVSC40Tutorial_Master
 puts "  Sky Diffuse Irradiance [W/m^2]: #{sky_diffuse_irradiance.round(4).to_s('F')}" # Matches to 464.8004 for 360th row in PVSC40Tutorial_Master

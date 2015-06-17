@@ -16,8 +16,10 @@ class SolarEphemeris
   end
 
   def sun_azimuth
-    radian_to_degree(bigdecimal_atan2(BigDecimal('-1') * bigdecimal_sin(degree_to_radian(hour_angle)), 
-                                      bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_tan(degree_to_radian(declination)) - bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(hour_angle))))
+    calculated_sun_azimuth = radian_to_degree(bigdecimal_atan2(BigDecimal('-1') * bigdecimal_sin(degree_to_radian(hour_angle)), 
+                                              bigdecimal_cos(degree_to_radian(@location.latitude)) * bigdecimal_tan(degree_to_radian(declination)) - bigdecimal_sin(degree_to_radian(@location.latitude)) * bigdecimal_cos(degree_to_radian(hour_angle))))
+    sun_azimuth = calculated_sun_azimuth < BigDecimal('0') ? calculated_sun_azimuth + BigDecimal('360') : calculated_sun_azimuth
+    sun_azimuth
   end
 
   def sun_elevation

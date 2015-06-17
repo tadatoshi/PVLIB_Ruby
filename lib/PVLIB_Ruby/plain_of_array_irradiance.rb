@@ -21,13 +21,12 @@ class PlainOfArrayIrradiance
   AVEARGE_EXTRATERRESTRIAL_IRRADIANCE = BigDecimal('1367') # [W/m^2]
   SMALL_VALUE_FOR_SKY_DIFFUSE_IRRADIANCE = BigDecimal('0.000001') # In order to make the calculated value consistent with the one by PVLIB_MatLab
 
-  def initialize(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, angle_of_incidence, surface_tilt, surface_azimuth, sun_zenith, sun_azimuth)
+  def initialize(direct_normal_irradiance, global_horizontal_irradiance, diffuse_horizontal_irradiance, day_of_year, albedo, surface_tilt, surface_azimuth, sun_zenith, sun_azimuth)
     @direct_normal_irradiance = direct_normal_irradiance           # DNI [W/m^2]
     @global_horizontal_irradiance = global_horizontal_irradiance   # GHI [W/m^2]
     @diffuse_horizontal_irradiance = diffuse_horizontal_irradiance # DHI [W/m^2]
     @day_of_year = day_of_year
     @albedo = albedo
-    @angle_of_incidence = angle_of_incidence
     @surface_tilt = surface_tilt
     @surface_azimuth = surface_azimuth
     @sun_zenith = sun_zenith
@@ -35,7 +34,7 @@ class PlainOfArrayIrradiance
   end
 
   def beam_irradiance
-    @direct_normal_irradiance * bigdecimal_cos(degree_to_radian(@angle_of_incidence))
+    @direct_normal_irradiance * bigdecimal_cos(degree_to_radian(angle_of_incidence))
   end
 
   def ground_diffuse_irradiance
