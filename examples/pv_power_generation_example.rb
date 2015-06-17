@@ -19,16 +19,15 @@ time = Time.new(2008, 10, 20, 11, 58, 12, utc_offset)
 albedo = BigDecimal('0.1500')
 array_tilt = BigDecimal('35')
 array_azimuth = BigDecimal('180')
-latitude = BigDecimal('35.0500')
-longitude = BigDecimal('-106.5400')
-altitude = BigDecimal('1660')
-location = Location.new(latitude, longitude, altitude)
 pressure = BigDecimal('62963')
 reference_solar_irradiance = BigDecimal('1000')
 wind_speed = BigDecimal('2.8786')
 air_temperature = BigDecimal('20.7700')
 
-solar_ephemeris = SolarEphemeris.new(time, location, pressure: pressure, temperature: air_temperature)
+sandia_location_data_filepath = File.join(DATA_DIRECTORY, 'sandia_location_example.csv')
+sandia_location = Location.create(sandia_location_data_filepath)
+
+solar_ephemeris = SolarEphemeris.new(time, sandia_location, pressure: pressure, temperature: air_temperature)
 
 sun_azimuth = solar_ephemeris.sun_azimuth
 apparent_sun_elevation = solar_ephemeris.apparent_sun_elevation
@@ -114,7 +113,7 @@ sandia_inverter = Inverter.create(sandia_inverter_data_filename)
 
 dc_to_ac_conversion = DcToAcConversion.new(sandia_inverter)
 
-puts "--- Inverter DC to AC conversion ---"
+puts "------- Inverter DC to AC conversion ------"
 puts "  AC power [W]: #{dc_to_ac_conversion.ac_power(array_voltage, array_power).round(4).to_s('F')}" # Matches to 1016.3 (with rounding) for 360th row in PVSC40Tutorial_Master
-puts "------------------------------------"
+puts "-------------------------------------------"
 puts ""

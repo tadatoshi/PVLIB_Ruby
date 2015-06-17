@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'bigdecimal'
 
 describe Location do
 
@@ -10,9 +11,11 @@ describe Location do
     
     sandia_location = Location.create(inverter_data_filename)
 
-    expect(sandia_location.latitude).to eq('35.05')
-    expect(sandia_location.longitude).to eq('-106.54')
-    expect(sandia_location.altitude).to eq('1660')
+    # In this class, the name of attribute from CSV file and the attr_reader method name are same. 
+    # Hence, reader method for the same name is added that converts the value to BigDecimal. 
+    expect(sandia_location.latitude).to eq(BigDecimal('35.05'))
+    expect(sandia_location.longitude).to eq(BigDecimal('-106.54'))
+    expect(sandia_location.altitude).to eq(BigDecimal('1660'))
 
   end  
 
@@ -20,7 +23,7 @@ describe Location do
 
     inverter = Location.new(latitude: '45')
 
-    expect(inverter.latitude).to eq('45')
+    expect(inverter.latitude).to eq(BigDecimal('45'))
 
   end
 
