@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{PVLIB written in Ruby.}
   spec.description   = %q{PVLIB_MatLab translated to Ruby code in Object-Oriented way.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/tadatoshi/PVLIB_Ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
