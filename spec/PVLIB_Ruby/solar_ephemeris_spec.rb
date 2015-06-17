@@ -10,7 +10,7 @@ describe SolarEphemeris do
     latitude = BigDecimal('35.0500')
     longitude = BigDecimal('-106.5400')
     altitude = BigDecimal('1660')
-    location = Location.new(latitude, longitude, altitude)
+    location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
 
     solar_ephemeris = SolarEphemeris.new(time, location)
 
@@ -33,7 +33,7 @@ describe SolarEphemeris do
     latitude = BigDecimal('35.0500')
     longitude = BigDecimal('-106.5400')
     altitude = BigDecimal('1660')
-    location = Location.new(latitude, longitude, altitude)
+    location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
     pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
     solar_ephemeris = SolarEphemeris.new(time, location, pressure: pressure)
@@ -57,7 +57,7 @@ describe SolarEphemeris do
     latitude = BigDecimal('35.0500')
     longitude = BigDecimal('-106.5400')
     altitude = BigDecimal('1660')
-    location = Location.new(latitude, longitude, altitude)
+    location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
     temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
     solar_ephemeris = SolarEphemeris.new(time, location, temperature: temperature)
@@ -81,7 +81,7 @@ describe SolarEphemeris do
     latitude = BigDecimal('35.0500')
     longitude = BigDecimal('-106.5400')
     altitude = BigDecimal('1660')
-    location = Location.new(latitude, longitude, altitude)
+    location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
     pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
     temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
@@ -110,7 +110,7 @@ describe SolarEphemeris do
         latitude = BigDecimal('35.0500')
         longitude = BigDecimal('-106.5400')
         altitude = BigDecimal('1660')
-        location = Location.new(latitude, longitude, altitude)
+        location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
         pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
         temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
@@ -128,7 +128,7 @@ describe SolarEphemeris do
         latitude = BigDecimal('35.0500')
         longitude = BigDecimal('-106.5400')
         altitude = BigDecimal('1660')
-        location = Location.new(latitude, longitude, altitude)
+        location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
         pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
         temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
@@ -145,7 +145,7 @@ describe SolarEphemeris do
         latitude = BigDecimal('35.0500')
         longitude = BigDecimal('-106.5400')
         altitude = BigDecimal('1660')
-        location = Location.new(latitude, longitude, altitude)
+        location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
         pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
         temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 
@@ -165,7 +165,7 @@ describe SolarEphemeris do
       latitude = BigDecimal('35.0500')
       longitude = BigDecimal('-106.5400')
       altitude = BigDecimal('1660')
-      location = Location.new(latitude, longitude, altitude)
+      location = Location.new(latitude: latitude, longitude: longitude, altitude: altitude)
       pressure = BigDecimal('62993') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
       temperature = BigDecimal('20.7700') # for 360th row in PVSC40Tutorial_Master (360/30 = 12, i.e. noon, note: measurement is every two minutes)
 

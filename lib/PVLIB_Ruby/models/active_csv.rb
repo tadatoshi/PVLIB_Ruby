@@ -33,7 +33,7 @@ class ActiveCsv
 
       if "#{header}=" == "="
 
-        unless previous_header.blank?
+        if !previous_header.blank? && !data[index].blank?
 
           assigned_data_for_previous_header = self.send(previous_header.to_sym)
           

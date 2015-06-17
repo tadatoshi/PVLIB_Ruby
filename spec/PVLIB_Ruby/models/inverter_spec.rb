@@ -4,7 +4,7 @@ describe Inverter do
 
   INVERTER_DATA_FILENAME = 'sandia_inverter_example.csv'
 
-  it 'should create model based on CSV data' do
+  it 'should create inverter based on CSV data' do
 
     inverter_data_filename = File.join(FIXTURES_DIRECTORY, INVERTER_DATA_FILENAME)
     
@@ -14,7 +14,7 @@ describe Inverter do
 
   end  
 
-  it 'should create model by specifying parameters' do
+  it 'should create inverter by specifying parameters' do
 
     inverter = Inverter.new(name: 'Test Inverter')
 
